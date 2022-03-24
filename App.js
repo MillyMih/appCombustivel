@@ -2,14 +2,27 @@ import { React, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 export default function App() {
-  const [valor1 = setValor1] = useState();
+  const [valor1, setValor1] = useState();
   const [valor2, setValor2] = useState();
   const [resultado, setResultado] = useState(0);
+  const [melhor, setMelhor] = useState();
 
-  
+
   function calcular(){
     setResultado(parseFloat(valor1) / parseFloat(valor2));
+
+    if(resultado <= 0.70){
+      setMelhor("recomendo você abastecer com álcool");
+    }
+    else{
+      setMelhor("recomendo você abastecer com gasolina");
+    }
   }
+
+ 
+
+
+ 
 
   return (
     <View style={styles.container}>
@@ -17,11 +30,11 @@ export default function App() {
       <Image
         style={styles.logo}
         source={{
-          uri: 'https://e7.pngegg.com/pngimages/814/85/png-clipart-computer-icons-calculator-icon-design-calculator-electronics-text.png',
+          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhxngjQKJEcUzaHNNcuGvA6FDNfOOuxV3J1A&usqp=CAU',
         }}
       />
       <View style={styles.bloco}>
-        <Text style={styles.textoBloco}>Valor da Gasolina</Text>
+        <Text style={styles.textoBloco}>Valor do Álcool Litro</Text>
         <TextInput 
           style={styles.input}
           keyboardType="numeric"
@@ -30,7 +43,7 @@ export default function App() {
         />
       </View>
       <View style={styles.bloco}>
-        <Text style={styles.textoBloco}>Valor do Alcool</Text>
+        <Text style={styles.textoBloco}>Valor da gasolina Litro</Text>
         <TextInput 
           style={styles.input}
           keyboardType="numeric"
@@ -46,10 +59,10 @@ export default function App() {
             <Text style={styles.textoBotao}>Calcular</Text>
         </TouchableOpacity>
       </View>
-      
+     
 
       <View style={styles.bloco}>
-        <Text style={styles.textoBloco}>Resultado: {resultado}</Text>
+        <Text style={styles.textoBloco}>Resultado: {resultado} {melhor}</Text>
       </View>
     </View>
   );
@@ -73,21 +86,23 @@ const styles = StyleSheet.create({
     borderColor:'#000',
     borderWidth:2,
     fontSize:30,
-    width:'80%'
+    width:'70%'
   },
   bloco:{
-    width:'100%',
+    width:'80%',
     alignItems:'center',
-    marginTop:30
+    borderRadius: 30,
+    marginTop:20
+    
   },
   botao:{
     backgroundColor:'#c3d',
-    width:'80%',
+    width:'40%',
     textAlign:'center'
   },
   textoBotao:{
     color:"#fff",
-    fontSize:30
+    fontSize:25
   }, 
   logo:{
     width:50,
